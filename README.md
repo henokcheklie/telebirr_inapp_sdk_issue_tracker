@@ -32,7 +32,7 @@ flutter pub get
   - Target/Compile SDK: 34 (Android 14)
   - Java Version: 17 (source and target compatibility)
   - Kotlin Version: 2.1.10
-  - Gradle Plugin Version: 8.7.0
+  - Gradle Plugin Version: 8.9.0
   - iOS: iOS 11.0 or higher (Coming soon)
 
 ## 🖥️ Supported Platforms
@@ -335,21 +335,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
         if (!mounted) return;
 
         // Show appropriate message based on status
-        if (result['success']) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Payment successful'),
-              backgroundColor: Colors.green,
-            ),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(result['message']),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
+        bool isSuccess = (result.isNotEmpty && result["status"] == true);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              isSuccess
+                  ? "Payment completed successfully!"
+                  : "Payment failed due to: ${result['message']}",
+              style: TextStyle(color: Colors.white)),
+          backgroundColor: isSuccess ? Colors.green : Colors.red,
+        ));
       } else {
         setState(() {
           _isProcessing = false;
