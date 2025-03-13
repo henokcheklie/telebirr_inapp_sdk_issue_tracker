@@ -368,7 +368,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📬 Contact Information
 
 - **Author**: Henok Cheklie
-- **Email**: henokchele@gmail.com
+- **Email**: henokcheklie@gmail.com
 - **Package**: telebirr_inapp_sdk
 - **Repository**: Private GitHub Repository (Contributions are not accepted as this is a privately maintained project)
 
