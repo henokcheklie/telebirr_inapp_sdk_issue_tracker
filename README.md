@@ -336,14 +336,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-> Note: This is a private project maintained by Henok Cheklie. Contributions are currently not accepted.
+## 🤝 Contributions
+
+This is a private project maintained by Henok Cheklie. Contributions are currently not accepted.
 
 ## 📬 Contact Information
 
 - **Author**: Henok Cheklie
 - **Email**: henokcheklie@gmail.com
 - **Package**: telebirr_inapp_sdk
-- **Repository**: Private GitHub Repository
 
 ## 🐞 Issues and Feedback
 
