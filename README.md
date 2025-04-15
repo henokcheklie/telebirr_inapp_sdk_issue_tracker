@@ -1,6 +1,9 @@
 # ✨ Telebirr In-App SDK for Flutter
 
-A Flutter plugin that seamlessly integrates the Telebirr InApp payment SDK for Android and iOS platforms. This package eliminates the need for native implementation by providing a unified Flutter interface for Telebirr in-app payments.
+![Pub Version](https://img.shields.io/pub/v/telebirr_inapp_sdk)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+
+Unofficial Flutter plugin that seamlessly integrates the Telebirr InApp payment SDK for Android and iOS platforms. This package eliminates the need for native implementation by providing a unified Flutter interface for Telebirr in-app payments.
 
 ## 🌟 Features
 
@@ -33,22 +36,21 @@ flutter pub get
   - Java Version: 17 (source and target compatibility)
   - Kotlin Version: 2.1.10
   - Gradle Plugin Version: 8.9.0
-  - iOS: iOS 11.0 or higher (Coming soon)
+- iOS:
+  - iOS 12.0 or higher
 
 ## 🖥️ Supported Platforms
 
 | Platform | Supported |
 | -------- | --------- |
 | Android  | ✅        |
-| iOS      | ⏳ (Soon) |
+| iOS      | ✅        |
 | Mac      | ❌        |
 | Web      | ❌        |
 | Linux    | ❌        |
 | Windows  | ❌        |
 
 ## 🎮 Usage
-
-### 🤖 Android Implementation
 
 ```dart
 import 'package:telebirr_inapp_sdk/telebirr_inapp_sdk.dart';
@@ -72,68 +74,17 @@ try {
 }
 ```
 
-### 🍎 iOS Implementation
+## 📥 Parameters
 
-- Coming soon
-
-```dart
-import 'package:telebirr_inapp_sdk/telebirr_inapp_sdk_ios.dart';
-
-// First, configure URL scheme in Info.plist as shown in iOS Configuration section
-
-final telebirr = TelebirrInappSdkIOS(
-  appId: 'your_app_id',
-  shortCode: 'your_short_code',
-  receiveCode: 'your_receive_code',
-  urlScheme: 'YOUR_URL_SCHEME'  // Must match URL scheme in Info.plist
-);
-
-// Start payment
-try {
-  final result = await telebirr.startPayment();
-  if (result['success']) {
-    print('Payment successful');
-  } else {
-    print('Payment failed: ${result['message']}');
-  }
-} catch (e) {
-  print('Error: $e');
-}
-```
+| Parameter   | Description                                                    |
+| ----------- | -------------------------------------------------------------- |
+| appId       | The App ID of the merchant, provided during payment setup.     |
+| shortCode   | The Short Code of the merchant, provided during payment setup. |
+| receiveCode | The code returned from your backend when placing a pre-order.  |
 
 ## 🔧 Platform-Specific Configuration
 
-### iOS Configuration
-
-1. Choose a unique URL scheme for your app (e.g., "myapp")
-2. Open your iOS project in Xcode (located in `ios/Runner.xcworkspace`)
-3. Add the following URL scheme configuration to your `Info.plist`, replacing `YOUR_URL_SCHEME` with your chosen scheme:
-
-```xml
-<!-- Add Telebirr Queried URL Scheme -->
-<key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>telebirrcustomerApp</string>
-  </array>
-```
-
-```xml
-<!-- Add the new URL scheme for the payment SDK -->
-<dict>
-    <key>CFBundleTypeRole</key>
-    <string>Editor</string>
-    <key>CFBundleURLName</key>
-    <string>com.yourapp.payment.telebirr</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-        <string>telebirrcustomerApp</string>
-    </array>
-</dict>
-```
-
-### Android Configuration
-
-No additional configuration is required for Android.
+No additional configuration is required for both Android and iOS.
 
 ## 🖥️ Backend Integration
 
@@ -261,7 +212,7 @@ Example UI for initiating a payment:
   }
 ```
 
-## ✅ Complete Implementation Example
+## 🧩 Complete Implementation Example
 
 This is a complete example showing how to implement Telebirr payments with a user interface:
 
@@ -283,7 +234,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   // Configuration constants
   static const String appId = "YOUR_APP_ID";
   static const String shortCode = "YOUR_SHORT_CODE";
-  // static const String urlScheme = "telebirrsdkexample"; // Must match Info.plist for ios only
 
   Future<void> _startPayment() async {
     if (!_formKey.currentState!.validate()) {
@@ -304,7 +254,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       });
 
       // First get the receiveCode from your API
-      final receiveCodeResult = await _getRreceiveCode(
+      final receiveCodeResult = await _getReceiveCode(
         amount: _amountController.text,
         title: "Telebirr Payment",
       );
@@ -361,9 +311,33 @@ class _PaymentScreenState extends State<PaymentScreen> {
 }
 ```
 
+## ❗ Error Codes
+
+## 🔹 Telebirr SDK Error Codes
+
+| Error Code | Description                                                                                     |
+| ---------- | ----------------------------------------------------------------------------------------------- |
+| 0          | Payment success.                                                                                |
+| -1         | Unknown error.                                                                                  |
+| -2         | Parameter error.                                                                                |
+| -3         | Payment was cancelled by the user.                                                              |
+| -10        | The Telebirr Payment app is not installed. (Telebirr super app is not installed on user device) |
+| -11        | The installed version of Telebirr Payment does not support this function.                       |
+
+## 🔸 Custom Plugin Error Codes
+
+| Error Code | Description                                               |
+| ---------- | --------------------------------------------------------- |
+| -997       | Invalid response from payment plugin.                     |
+| -996       | Generic error code (fallback if e.details is not an int). |
+| -995       | Unexpected error, e.g., runtime exceptions.               |
+
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
+
+- see the [LICENSE](https://github.com/henokcheklie/telebirr_inapp_sdk_issue_tracker.git) file for details.
+  > Note: This is a private project maintained by Henok Cheklie. Contributions are currently not accepted.
 
 ## 📬 Contact Information
 
